@@ -1,4 +1,5 @@
 import "./Home.css";
+
 function Home(){
 
    return(
@@ -7,7 +8,13 @@ function Home(){
 
          <h1>Welcome to Blog Platform</h1>
 
-         <p>Read and share blogs easily.</p>
+         <p>
+            Read, write and share blogs easily.
+         </p>
+
+         <button>
+            Explore Blogs
+         </button>
 
       </div>
 

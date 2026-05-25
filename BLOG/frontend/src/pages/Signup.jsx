@@ -1,64 +1,99 @@
 import { useState } from "react";
-import axios from "axios";
-import "./Auth.css";
-function Signup() {
 
-   const [form, setForm] = useState({
-      username: "",
-      email: "",
-      password: ""
+import axios from "axios";
+
+import { Link, useNavigate } from "react-router-dom";
+
+import "./Auth.css";
+
+function Signup(){
+
+   const navigate = useNavigate();
+
+   const [form,setForm] = useState({
+      username:"",
+      email:"",
+      password:""
    });
+
+   const handleChange = (e) => {
+
+      setForm({
+         ...form,
+         [e.target.name]:e.target.value
+      });
+
+   };
 
    const handleSubmit = async (e) => {
 
       e.preventDefault();
 
-      await axios.post(
-         "http://localhost:5000/api/auth/signup",
-         form
-      );
+      try{
 
-      alert("Signup successful");
+         await axios.post(
+            "http://localhost:5000/api/auth/signup",
+            form
+         );
+
+         navigate("/");
+
+      }catch(err){
+
+         alert("Signup failed");
+
+      }
+
    };
 
-   return (
+   return(
 
-      <form onSubmit={handleSubmit}>
+      <div className="auth-container">
 
-         <input
-            placeholder="Username"
-            onChange={(e) =>
-               setForm({
-                  ...form,
-                  username: e.target.value
-               })
-            }
-         />
+         <form
+            className="auth-form"
+            onSubmit={handleSubmit}
+         >
 
-         <input
-            placeholder="Email"
-            onChange={(e) =>
-               setForm({
-                  ...form,
-                  email: e.target.value
-               })
-            }
-         />
+            <h1>Create Account</h1>
 
-         <input
-            type="password"
-            placeholder="Password"
-            onChange={(e) =>
-               setForm({
-                  ...form,
-                  password: e.target.value
-               })
-            }
-         />
+            <input
+               type="text"
+               name="username"
+               placeholder="Enter Username"
+               onChange={handleChange}
+            />
 
-         <button>Signup</button>
+            <input
+               type="email"
+               name="email"
+               placeholder="Enter Email"
+               onChange={handleChange}
+            />
 
-      </form>
+            <input
+               type="password"
+               name="password"
+               placeholder="Enter Password"
+               onChange={handleChange}
+            />
+
+            <button type="submit">
+               Signup
+            </button>
+
+            <p>
+               Already have an account?
+               {" "}
+               <Link to="/login">
+                  Login
+               </Link>
+            </p>
+
+         </form>
+
+      </div>
+
    );
 }
 

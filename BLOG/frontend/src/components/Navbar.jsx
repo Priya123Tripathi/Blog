@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import "./Navbar.css";
 
 function Navbar(){
@@ -7,7 +8,9 @@ function Navbar(){
 
       <div className="navbar">
 
-         <h2>BlogApp</h2>
+         <h2 className="logo">
+            BlogApp
+         </h2>
 
          <div className="nav-links">
 

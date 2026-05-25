@@ -1,13 +1,40 @@
 .home{
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    margin-top:100px;
+    background:linear-gradient(to right,#141e30,#243b55);
+    color:white;
+    padding:20px;
 }
 
 .home h1{
-    font-size:50px;
+    font-size:60px;
+    margin-bottom:20px;
+    letter-spacing:1px;
 }
 
 .home p{
-    font-size:20px;
-    color:gray;
+    font-size:22px;
+    color:#d1d5db;
+    margin-bottom:30px;
+}
+
+.home button{
+    padding:14px 30px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:#141e30;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.home button:hover{
+    transform:scale(1.05);
+    background:#e5e7eb;
 }

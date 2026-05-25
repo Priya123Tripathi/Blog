@@ -1,18 +1,25 @@
 import { useState } from "react";
-import axios from "axios";
-import "./Auth.css";
-function Login() {
 
-   const [form, setForm] = useState({
-      email: "",
-      password: ""
+import axios from "axios";
+
+import { Link, useNavigate } from "react-router-dom";
+
+import "./Auth.css";
+
+function Login(){
+
+   const navigate = useNavigate();
+
+   const [form,setForm] = useState({
+      email:"",
+      password:""
    });
 
    const handleChange = (e) => {
 
       setForm({
          ...form,
-         [e.target.name]: e.target.value
+         [e.target.name]:e.target.value
       });
 
    };
@@ -21,7 +28,7 @@ function Login() {
 
       e.preventDefault();
 
-      try {
+      try{
 
          const res = await axios.post(
             "http://localhost:5000/api/auth/login",
@@ -33,13 +40,9 @@ function Login() {
             res.data.token
          );
 
-         alert("Login successful");
+         navigate("/");
 
-         console.log(res.data);
-
-      } catch (err) {
-
-         console.log(err);
+      }catch(err){
 
          alert("Login failed");
 
@@ -47,35 +50,41 @@ function Login() {
 
    };
 
-   return (
+   return(
 
-      <div>
+      <div className="auth-container">
 
-         <h1>Login</h1>
+         <form
+            className="auth-form"
+            onSubmit={handleSubmit}
+         >
 
-         <form onSubmit={handleSubmit}>
+            <h1>Login</h1>
 
             <input
                type="email"
                name="email"
-               placeholder="Enter email"
+               placeholder="Enter Email"
                onChange={handleChange}
             />
-
-            <br /><br />
 
             <input
                type="password"
                name="password"
-               placeholder="Enter password"
+               placeholder="Enter Password"
                onChange={handleChange}
             />
-
-            <br /><br />
 
             <button type="submit">
                Login
             </button>
+
+            <p>
+               Don't have an account?
+               <Link to="/signup">
+                  Signup
+               </Link>
+            </p>
 
          </form>
 
