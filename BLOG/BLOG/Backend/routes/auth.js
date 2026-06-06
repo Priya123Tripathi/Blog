@@ -1,6 +1,9 @@
 const router = require("express").Router();
+
 const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcryptjs");
+
 const User = require("../model/User");
 
 
@@ -14,7 +17,7 @@ router.get("/", (req, res) => {
 
 // SIGNUP
 router.post("/signup", async (req, res) => {
- console.log("SIGNUP BODY =>", req.body); 
+
    try {
 
       const { username, email, password } = req.body;
@@ -61,9 +64,11 @@ router.post("/login", async (req, res) => {
    try {
 
       const { email, password } = req.body;
+
       const user = await User.findOne({ email });
 
       if (!user) {
+
          return res.status(400).json({
             message: "Invalid email"
          });
@@ -76,6 +81,7 @@ router.post("/login", async (req, res) => {
       );
 
       if (!isMatch) {
+
          return res.status(400).json({
             message: "Wrong password"
          });
@@ -84,10 +90,7 @@ router.post("/login", async (req, res) => {
 
       const token = jwt.sign(
          { id: user._id },
-         process.env.JWT_SECRET,
-          {
-        expiresIn: "7d"
-    }
+         process.env.JWT_SECRET
       );
 
       res.status(200).json({
@@ -96,15 +99,15 @@ router.post("/login", async (req, res) => {
       });
 
    } catch (err) {
+
       console.log(err);
+
       res.status(500).json({
          message: "Server Error"
       });
-   }
-});
 
-router.post('/logout', (req, res) => {
-  res.status(200).json({ message: 'Logged out successfully' })
-})
+   }
+
+});
 
 module.exports = router;
