@@ -1,30 +1,59 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 
-import "./Navbar.css";
+function Navbar() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
-function Navbar(){
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5000/api/auth/logout");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      localStorage.removeItem("token");
+      navigate("/login");
+      window.location.reload();
+    }
+  };
 
-   return(
+  return (
+    <nav className="w-full bg-zinc-900 border-b border-zinc-800 px-6 md:px-12 py-4 flex items-center justify-between">
 
-      <div className="navbar">
+      {/* Logo */}
+      <Link to="/" className="flex items-center gap-2 text-stone-100 no-underline">
+        <div className="w-6 h-6 rounded bg-amber-400" />
+        <span className="font-serif text-xl font-bold tracking-tight">BlogApp</span>
+      </Link>
 
-         <h2 className="logo">
-            BlogApp
-         </h2>
+      {/* Nav Links — sirf logged in hone par dikhao */}
+      {token && (
+        <div className="flex items-center gap-6">
+          <Link
+            to="/"
+            className="text-sm text-zinc-400 hover:text-stone-100 transition-colors duration-200 no-underline"
+          >
+            Home
+          </Link>
 
-         <div className="nav-links">
+          <Link
+            to="/create-post"
+            className="text-sm text-zinc-400 hover:text-stone-100 transition-colors duration-200 no-underline"
+          >
+            Create Post
+          </Link>
 
-            <Link to="/">Home</Link>
+          <button
+            onClick={handleLogout}
+            className="text-sm px-4 py-2 rounded-lg bg-amber-400 text-zinc-950 font-semibold hover:bg-amber-300 active:scale-[0.97] transition-all duration-200"
+          >
+            Logout
+          </button>
+        </div>
+      )}
 
-            <Link to="/login">Login</Link>
-
-            <Link to="/signup">Signup</Link>
-
-         </div>
-
-      </div>
-
-   );
+    </nav>
+  );
 }
 
 export default Navbar;

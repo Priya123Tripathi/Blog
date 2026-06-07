@@ -1,25 +1,41 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
+
 const Cors = require("cors");
-const connectDB = require("./config/db"); 
 
 const authRoutes = require("./routes/auth");
-const postRoutes = require("./routes/post");
 
 const app = express();
 
 app.use(Cors());
+
 app.use(express.json());
 
-connectDB(); 
+console.log(process.env.MONGO_URL);
+
+mongoose.connect(process.env.MONGO_URL)
+.then(() => {
+
+   console.log("MongoDB connected");
+
+})
+.catch((err) => {
+
+   console.log(err);
+
+});
 
 app.use("/api/auth", authRoutes);
-app.use("/api/posts", postRoutes);
 
 app.get("/", (req, res) => {
-    res.send("API running");
+
+   res.send("API running");
+
 });
 
 app.listen(5000, () => {
-    console.log("server is live");
+
+   console.log("server is live");
+
 });
