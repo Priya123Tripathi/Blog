@@ -16,7 +16,14 @@ function App(){
 
          <Routes>
 
-            <Route path="/" element={<Home />} />
+        <Route
+      path="/"
+     element={
+     localStorage.getItem("token")
+      ? <Home />
+      : <Login />
+  }
+/>
 
             <Route path="/login" element={<Login />} />
 
