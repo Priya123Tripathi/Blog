@@ -1,17 +1,19 @@
 require("dotenv").config();
 const express = require("express");
 const Cors = require("cors");
-const connectDB = require("./config/db"); 
-const PORT = process.env.PORT || 5000;
+const connectDB = require("./config/db");
+
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
 
 const app = express();
 
+const PORT = process.env.PORT || 5000;
+
 app.use(Cors());
 app.use(express.json());
 
-connectDB(); 
+connectDB();
 
 app.use("/api/auth", authRoutes);
 app.use("/api/posts", postRoutes);
@@ -21,5 +23,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log("server is live");
+    console.log(`server is live on port ${PORT}`);
 });
