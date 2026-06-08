@@ -23,7 +23,7 @@ export default function Login() {
       const res = await axios.post("https://blog-backend-rt24.onrender.com/api/auth/login", form);
     console.log(res.data);
       localStorage.setItem("token", res.data.token);
-      navigate("/");
+      window.location.href = "/";
     } catch (err) {
       setError("Invalid email or password. Please try again.");
       setShake(true);
