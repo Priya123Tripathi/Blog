@@ -21,6 +21,7 @@ export default function Login() {
     setError("");
     try {
       const res = await axios.post("https://blog-backend-rt24.onrender.com/api/auth/login", form);
+    console.log(res.data);
       localStorage.setItem("token", res.data.token);
       navigate("/");
     } catch (err) {
