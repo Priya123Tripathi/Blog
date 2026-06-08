@@ -24,7 +24,7 @@ function Signup() {
     setError("");
 
     try {
-      await axios.post("http://localhost:5000/api/auth/signup", form);
+      await axios.post("https://blog-backend-rt24.onrender.com/api/auth/signup", form);
       navigate("/");
     } catch (err) {
       setError("Signup failed. Please try again.");

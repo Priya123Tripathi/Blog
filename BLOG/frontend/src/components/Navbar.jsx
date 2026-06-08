@@ -7,7 +7,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/api/auth/logout");
+      await axios.post("https://blog-backend-rt24.onrender.com/api/auth/logout");
     } catch (err) {
       console.log(err);
     } finally {
@@ -54,6 +54,6 @@ function Navbar() {
 
     </nav>
   );
-}
+}  
 
 export default Navbar;

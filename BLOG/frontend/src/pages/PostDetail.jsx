@@ -13,7 +13,7 @@ function PostDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const res = await axios.get(`https://blog-backend-rt24.onrender.com/api/posts/${id}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -31,7 +31,7 @@ function PostDetail() {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.post(
-        `http://localhost:5000/api/posts/${id}/comment`,
+        `https://blog-backend-rt24.onrender.com/api/posts/${id}/comment`,
         { text: comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );

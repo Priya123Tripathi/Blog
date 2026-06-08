@@ -10,7 +10,11 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(Cors());
+app.use(Cors({
+  origin: "npx plugins add vercel/vercel-plugin",
+    credentials: true,
+})
+);
 app.use(express.json());
 
 connectDB();
