@@ -6,15 +6,9 @@ function Navbar() {
   const token = localStorage.getItem("token");
 
   const handleLogout = async () => {
-    try {
-      await axios.post("https://blog-backend-rt24.onrender.com/api/auth/logout");
-    } catch (err) {
-      console.log(err);
-    } finally {
-      localStorage.removeItem("token");
-      navigate("/login");
-      window.location.reload();
-    }
+   localStorage.removeItem("token");
+  navigate("/login");
+  window.location.reload();
   };
 
   return (
