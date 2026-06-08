@@ -10,10 +10,11 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-app.use(Cors({
-  origin: "npx plugins add vercel/vercel-plugin",
+app.use(
+  Cors({
+    origin: "https://blog-two-green-22.vercel.app",
     credentials: true,
-})
+  })
 );
 app.use(express.json());
 
