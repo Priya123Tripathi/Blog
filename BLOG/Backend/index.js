@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const Cors = require("cors");
 const connectDB = require("./config/db"); 
-
+const PORT = process.env.PORT || 5000;
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/post");
 
@@ -20,6 +20,6 @@ app.get("/", (req, res) => {
     res.send("API running");
 });
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
     console.log("server is live");
 });
